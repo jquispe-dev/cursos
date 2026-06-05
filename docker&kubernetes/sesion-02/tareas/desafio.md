@@ -15,12 +15,15 @@ Antes de ejecutar la imagen:
 1. ¿Qué hace esta imagen? Lee la descripción en hub.docker.com.
    
    MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) de código abierto y ampliamente utilizado.
+
 2. ¿Qué variables de entorno requiere o acepta?
    
     Variables de entorno: `MYSQL_ROOT_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_ALLOW_EMPTY_PASSWORD`, ...
+
 3. ¿En qué directorio almacena sus datos persistentes?
    
    Almacena en: `/var/lib/mysql`.
+
 4. ¿Qué puerto expone?
    
    Puerto por defecto: `3306`.
@@ -45,25 +48,25 @@ Después de ejecutarla:
                    "sha256:b7b9d349f510eed9b652ffb5f301ea8d9ccbca865df41ee3b23f17c4ec4658f2"
                ]
    ```
+
 6. ¿Qué comando ejecuta por defecto? (`docker image inspect --format '{{.Config.Cmd}}'`)
    
    ```shell
    docker image inspect mysql:9.7.0 --format '{{.Config.Cmd}}'
    [mysqld]
    ```
-   
-   
+
 7. ¿Qué procesos corren dentro? (`docker top`)
    
    El proceso es: `mysqld`.
+
 8. ¿Qué pasa con los datos si eliminas el contenedor y lo vuelves a crear sin volumen?
    
    Los datos persisten, pero el contenedor sin el volumen tendrá los datos vacios.
+
 9. ¿Qué pasa si lo vuelves a crear con un volumen nombrado?
    
    Los datos persistan.
-   
-   
 
 ## Lo que debes hacer
 
@@ -155,8 +158,6 @@ Bye
 # exit 
 exit
 ```
-
-
 
 ## Criterio de éxito
 
