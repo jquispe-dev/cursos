@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>API Gateway - Lab 03</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    h1 { color: #333; }
+    pre { background: #f4f4f4; padding: 12px; border-radius: 4px; overflow-x: auto; }
+    button { background: #0066cc; color: white; border: none; padding: 8px 16px;
+             border-radius: 4px; cursor: pointer; margin: 4px; }
+    button:hover { background: #0055aa; }
+    #output { margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <h1>API Gateway con nginx</h1>
+  <p>Todas las solicitudes pasan por nginx en el puerto 8080.</p>
+  <pre>Cliente :8080
+  ├── /api/* → backend:5000
+  └── /*     → frontend:80</pre>
+
+  <h2>Probar el backend (via gateway)</h2>
+  <button onclick="req('/api/info')">GET /api/info</button>
+  <button onclick="req('/api/users')">GET /api/users</button>
+  <button onclick="req('/api/health')">GET /api/health</button>
+  <button onclick="req('/gateway/health')">Gateway health</button>
+
+  <div id="output"></div>
+
+  <script>
+    async function req(path) {
+      const out = document.getElementById('output');
+      out.innerHTML = '<pre>Cargando...</pre>';
+      try {
+        const r = await fetch(path);
+        const text = await r.text();
+        let body;
+        try { body = JSON.stringify(JSON.parse(text), null, 2); }
+        catch { body = text; }
+        out.innerHTML = '<pre>Status: ' + r.status + '\n\n' + body + '</pre>';
+      } catch (e) {
+        out.innerHTML = '<pre>Error: ' + e.message + '</pre>';
+      }
+    }
+  </script>
+</body>
+</html>

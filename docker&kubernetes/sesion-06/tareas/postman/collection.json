@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "Lab 03 - nginx Gateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "user_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Gateway health",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/gateway/health"
+      }
+    },
+    {
+      "name": "Frontend (via gateway)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/"
+      }
+    },
+    {
+      "name": "Backend info (via gateway)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/info"
+      }
+    },
+    {
+      "name": "Backend health (via gateway)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/health"
+      }
+    },
+    {
+      "name": "Listar usuarios (via gateway)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/users"
+      }
+    },
+    {
+      "name": "Obtener usuario por ID (via gateway)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/users/{{user_id}}"
+      }
+    },
+    {
+      "name": "Crear usuario (via gateway)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/users",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Diego Torres\",\n  \"email\": \"diego@ejemplo.com\"\n}"
+        }
+      }
+    }
+  ]
+}
